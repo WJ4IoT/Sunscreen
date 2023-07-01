@@ -57,10 +57,11 @@ Steps in the automation are:
 
 2 check if there is a change, if not stop
 
-3 
+3 check if we need to delay the change to avoid too frequent changes
+
+4 change and (re)set timer
 
 
-
-
+BTW = By The Way
 YAW2A = Yet Another Way to Automate.
 TECP = Trial & Error, Cut & Paste
