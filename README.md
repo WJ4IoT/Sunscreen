@@ -62,6 +62,8 @@ Steps in the automation are:
 4 change and (re)set timer
 
 BTW = By The Way
+
 YAW2A = Yet Another Way to Automate.
+
 TECP = Trial & Error, Cut & Paste
 
