@@ -42,7 +42,7 @@ Resulting in the boolean vaLues (created in the template file)
 - input_boolean..sunscreen_valid_azimuth
 - input_boolean.sunscreen_valid_elevation
 
-These boolean values are used in the automation with the additional booleans:
+These boolean values are used in the automation with the additional booleans (BTW you also need them to add in helpers):
 - timer.sunscreen_delay
 - input_boolean.sunscreen_set_manual
 - input_boolean.sunscreen_conditions_close
