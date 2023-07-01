@@ -3,8 +3,8 @@ Sunscreen Automation in Home Assistant (YAW2A)
 
 There are many type of sunscreen / blinds and perhaps after lights your next thing to automate.
 With fresh or read zero experience in Home Assistant and YAML's, tried to RTFM and find proper examples.
-see: https://community.home-assistant.io/t/how-to-automate-my-awning-sunscreen/40813/91
 The example suitable for my sunscreen I found in this topic from Remco:
+see: https://community.home-assistant.io/t/how-to-automate-my-awning-sunscreen/40813/91
 
 stubborn as i am changed things, (likely to understand better the proces), hence the reason I did not fork his repository,
 see: https://github.com/remb0/Sunscreen
