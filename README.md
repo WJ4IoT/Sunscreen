@@ -6,14 +6,15 @@ With fresh or read zero experience in Home Assistant and YAML's, tried to RTFM a
 The example suitable for my sunscreen I found in this topic from Remco:
 see: https://community.home-assistant.io/t/how-to-automate-my-awning-sunscreen/40813/91
 
-stubborn as i am changed things, (likely to understand better the proces), hence the reason I did not fork his repository,
+stubborn as i am changed things, (likely to understand better the proces), hence the reason I did not fork his repository.
+
 see: https://github.com/remb0/Sunscreen
 
 So this automation is suitable for a (outside the house) sunscreen with only two options:
 - fully open (rolled inside the cassette)
 - fully close (rolled-out)
 
-For this process you need the folowing sensors:
+For this process the folowing sensors are used:
 - rain (using Buienrader.nl but feel free to change)
 - wind (using Buienrader.nl but feel free to change)
 - irradiance (using Buienrader.nl but feel free to change)
