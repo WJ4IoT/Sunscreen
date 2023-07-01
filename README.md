@@ -15,7 +15,7 @@ So this automation is suitable for a (outside the house) sunscreen with only two
 - fully open (rolled inside the cassette)
 - fully close (rolled-out)
 
-To be honest this is not yet fool proof; if you manual operrate your sunscreen during havy rain fail you just can do that.
+To be honest this is not yet fool proof; if you manual operrate your sunscreen during havy rain fall you just can do that.
 
 This is done by the following conditions (subject to change):
 
