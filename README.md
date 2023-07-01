@@ -15,7 +15,7 @@ So this automation is suitable for a (outside the house) sunscreen with only two
 - fully open (rolled inside the cassette)
 - fully close (rolled-out)
 
-This is dopne by the following conditions (subject to change):
+This is done by the following conditions (subject to change):
 
 For this process the folowing sensors are used:
 - rain (using Buienrader.nl but feel free to change)
