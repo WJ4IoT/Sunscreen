@@ -24,7 +24,7 @@ For this process the folowing sensors are used:
 - Azimuth (from sun.sun)
 - Elavation (from sun.sun)
 - in which months to operate
-- anything else what better suits your needs like temperature, lumination, solar values, etc
+- anything else what better suits your needs like temperature, lumination, solar values, etc (you only need to add them)
 
 These are compared against the valid values (created manual in helpers):
 - input_number.sunscreen_valid_raid
