@@ -26,21 +26,26 @@ For this process the folowing sensors are used:
 - in which months to operate
 - anything else what better suits your needs like temperature, lumination, solar values, etc
 
-These are compared against the valid values:
+These are compared against the valid values (created manual in helpers):
 - input_number.sunscreen_valid_raid
 - input_number.sunscreen_valid_wind
 - input_number.sunscreen_valid_irradiance
 - input_number.sunscreen_valid_azimuth
 - input_number.sunscreen_valid_elevation
 
-Resulting in the boolean vaLues:
-- input_number.sunscreen_valid_raid
-- input_number.sunscreen_valid_wind
-- input_number.sunscreen_valid_irradiance
-- input_number.sunscreen_valid_azimuth
-- input_number.sunscreen_valid_elevation
+Resulting in the boolean vaLues (ceated in the template file)
+- input_boolean.sunscreen_valid_raid
+- input_boolean.sunscreen_valid_wind
+- input_boolean..sunscreen_valid_irradiance
+- input_boolean..sunscreen_valid_azimuth
+- input_boolean.sunscreen_valid_elevation
 
-These boolean values are used in the automation.
+These boolean values are used in the automation with the additional booleans:
+- timer.sunscreen_delay
+- input_boolean.sunscreen_set_manual
+- input_boolean.sunscreen_conditions_close
+- input_boolean.sunscreen_conditions_close_request
+- input_boolean.sunscreen_fake # can be used for sandboxing
 
 Steps in the automation are:
 
@@ -51,6 +56,7 @@ Steps in the automation are:
   - delayed action based upon the timer becomes idle
 
 2 check if there is a change, if not stop
+
 3 
 
 
