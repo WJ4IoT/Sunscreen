@@ -1,0 +1,86 @@
+###################################################################################
+#   @author         :   WJ4IoT inspired by examples from Remb0 
+#   @last update    :   01/07/2023
+#   @configuration  :   template: !include_dir_merge_list template
+#   @file           :   config/template/sunscreen.yaml
+#   @refresh with   :   TEMPLATE ENTITIES
+#   @description    :   Template sensors for sunscreen conditions states
+###################################################################################
+# Sunscreen
+################################################################################### 
+- binary_sensor:
+# Wind strenght - in km/h
+# depening on the type of the sunscreen; please check your sunscreen supplier
+  - name: sunscreen_valid_wind
+    state: >-
+      {% if states('sensor.buienradar_wind_speed')|float <= states('input_number.sunscreen_valid_wind')|float %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if states('sensor.buienradar_wind_speed')|float <= states('input_number.sunscreen_valid_wind')|float %}
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
+# Almost no rain in the next 60 minutes is predicted
+# put this just on ZERO to be on the safe side 
+  - name: sunscreen_no_rain_next_hour
+    state: >-   
+      {% if states('sensor.buienradar_precipitation_forecast_total')|float <= states('input_number.sunscreen_valid_rain')|float %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if states('sensor.buienradar_precipitation_forecast_total')|float <= states('input_number.sunscreen_valid_rain')|float %}
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
+# In which months may the automation of the sunscreen work    
+  - name: sunscreen_valid_months
+    state: >-
+      {% if (now().month >= 5) and (now().month <= 9) %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if (now().month >= 5) and (now().month <= 9) %} 
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
+# When does the sunscreen catch direct sunlight?: based upon Azimuth
+  - name: sunscreen_valid_azimuth
+    state: >-   
+      {% if states('sensor.sun_solar_azimuth')|float >= states('input_number.sunscreen_valid_azimuth')|float %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if states('sensor.sun_solar_azimuth')|float >= states('input_number.sunscreen_valid_azimuth')|float %}
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
+# When does the sunscreen catch direct sunlight?: based upon elevation
+# if elevation is too low sun goes behind trees or under the sunscreen.
+  - name: sunscreen_valid_elevation
+    state: >-   
+      {% if states('sensor.sun_solar_elevation')|float(0) >= states('input_number.sunscreen_valid_elevation')|float %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if states('sensor.sun_solar_elevation')|float(0) >= states('input_number.sunscreen_valid_elevation')|float %}
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
+# When is there enough light
+  - name: sunscreen_valid_irradiance
+    state: >-   
+      {% if states('sensor.buienradar_irradiance')|float(0) >= states('input_number.sunscreen_valid_irradiance')|float %} True
+      {% else %} False
+      {% endif %}
+    icon: >-
+      {% if states('sensor.buienradar_irradiance')|float(0) >= states('input_number.sunscreen_valid_irradiance')|float %}
+        mdi:check-outline
+      {% else %}
+        mdi:alert-outline
+      {% endif %}
