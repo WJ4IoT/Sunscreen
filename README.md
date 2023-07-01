@@ -63,6 +63,8 @@ Steps in the automation are:
 
 4 change and (re)set timer
 
+For the moment I am not using packages (I wish I did), buy in principle you can C&P this automation into automation for the exception of the change of "YOUR_SUNSCREEN_ID"
+
 BTW = By The Way
 
 YAW2A = Yet Another Way to Automate.
