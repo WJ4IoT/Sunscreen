@@ -33,7 +33,7 @@ These are compared against the valid values (created manual in helpers):
 - input_number.sunscreen_valid_azimuth
 - input_number.sunscreen_valid_elevation
 
-Resulting in the boolean vaLues (ceated in the template file)
+Resulting in the boolean vaLues (created in the template file)
 - input_boolean.sunscreen_valid_raid
 - input_boolean.sunscreen_valid_wind
 - input_boolean..sunscreen_valid_irradiance
@@ -60,7 +60,6 @@ Steps in the automation are:
 3 check if we need to delay the change to avoid too frequent changes
 
 4 change and (re)set timer
-
 
 BTW = By The Way
 YAW2A = Yet Another Way to Automate.
