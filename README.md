@@ -63,7 +63,7 @@ Steps in the automation are:
 
 4 change and (re)set timer
 
-For the moment I am not using packages (I wish I did), buy in principle you can C&P this automation into automation for the exception of the change of "YOUR_SUNSCREEN_ID"
+For the moment I am not using packages (I wish I did), but in principle you can C&P this automation into automation for the exception of the change of "YOUR_SUNSCREEN_ID", the template file you can save according instuctions or what you use to do.
 
 BTW = By The Way
 
