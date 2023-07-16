@@ -12,10 +12,19 @@ stubborn as i am changed things, (likely to understand better the proces), hence
 see: https://github.com/remb0/Sunscreen
 
 So this automation is suitable for a (outside the house) sunscreen with only two options:
-- fully open (rolled inside the cassette)
-- fully close (rolled-out)
+- fully open = rolled in(side the cassette)
+- fully close = rolled-out
 
 To be honest this is not yet fool proof; if you manual operrate your sunscreen during heavy rain fall you just can do that.
+
+As you can see in the automation I consider wind and rain as critical in other words roll-in (to speak of close or open can be a bit confusing for me)
+
+I also use the orientation of my house (translated in sun-azimuth) and for an earlier sunset due nearby trees the sun- elevation (over time or sun set/rise).
+
+The tricky part remains the amount of sun; presently with sensor.buienradar_irradiance but I am thinking to change this part in more locally option with a lux sensor. Situated inside the house will give another problem due to likely the dimming factor of ther sunscreen.
+
+To avoid frequent roll-in and roll-out's a waiting time is introduced for the next movement but off course in case of a critical situation there will be a direct action.
+
 
 This is done by the following conditions (subject to change):
 
@@ -31,7 +40,7 @@ For this process the folowing sensors are used:
 These are compared against the valid values (just create them manual in helpers):
 - input_number.sunscreen_valid_raid
 - input_number.sunscreen_valid_wind
-- input_number.sunscreen_valid_irradiance
+- input_number.sunscreen_valid_irradiance a _low and a _high value 
 - input_number.sunscreen_valid_azimuth
 - input_number.sunscreen_valid_elevation
 
@@ -53,8 +62,8 @@ Steps in the automation are:
 
 1 Triggers to start the automation are the criteria of a potentitial change
   These are devided in three trigger-ID's
-  - direct (critical wind/rain starting)
-  - others; these can be delayed if a timer is still running or direct.
+  - critical: when there is to much wind or rain the sunscreen will roll-in
+  - normal; these can be delayed if a timer is still running or direct.
   - delayed action based upon the timer becomes idle
 
 2 check if there is a change, if not stop
@@ -65,9 +74,7 @@ Steps in the automation are:
 
 For the moment I am not using packages (I wish I did), but in principle you can C&P this automation into automation for the exception of the change of "YOUR_SUNSCREEN_ID", the template file you can save according instuctions or what you use to do.
 
-BTW = By The Way
-
-YAW2A = Yet Another Way to Automate.
+BTW = By The Way YAW2A = Yet Another Way to Automate.
 
 TECP = Trial & Error, Cut & Paste
 
