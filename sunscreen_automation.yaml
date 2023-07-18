@@ -57,18 +57,18 @@ action:
             data: {}
             target:
               entity_id:
-                - input_boolean.sunscreen_conditions_close_request
+                - input_boolean.sunscreen_conditions_request
     default:
       - service: input_boolean.turn_off
         data: {}
         target:
           entity_id:
-            - input_boolean.sunscreen_conditions_close_request
+            - input_boolean.sunscreen_conditions_request
   - if:
       - condition: template
         value_template: >-
-          {{ states('input_boolean.sunscreen_conditions_close') ==
-          states('input_boolean.sunscreen_conditions_close_request') }}
+          {{ states('input_boolean.sunscreen_conditions') ==
+          states('input_boolean.sunscreen_conditions_request') }}
     then:
       - stop: ""
     else: []
@@ -103,30 +103,30 @@ action:
         error: false
   - if:
       - condition: state
-        entity_id: input_boolean.sunscreen_conditions_close_request
+        entity_id: input_boolean.sunscreen_conditions_request
         state: "on"
     then:
       - service: input_boolean.turn_on
         data: {}
         target:
           entity_id:
-            - input_boolean.sunscreen_conditions_close
-            - input_boolean.sunscreen_fake
-      - device_id: 66e36977a1b807baed363fcb41cbad5a
-        domain: cover
-        entity_id: cover.zonnescherm
-        type: close
-    else:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id:
-            - input_boolean.sunscreen_conditions_close
+            - input_boolean.sunscreen_condition
             - input_boolean.sunscreen_fake
       - device_id: 66e36977a1b807baed363fcb41cbad5a
         domain: cover
         entity_id: cover.zonnescherm
         type: open
+    else:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id:
+            - input_boolean.sunscreen_conditions
+            - input_boolean.sunscreen_fake
+      - device_id: 66e36977a1b807baed363fcb41cbad5a
+        domain: cover
+        entity_id: cover.zonnescherm
+        type: close
   - service: timer.start
     data:
       duration: "00:45:00"
