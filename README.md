@@ -12,13 +12,13 @@ stubborn as i am changed things, (likely to understand better the proces), hence
 see: https://github.com/remb0/Sunscreen
 
 So this automation is suitable for a (outside the house) sunscreen with only two options:
-- fully open = rolled in(side the cassette)
-- fully close = rolled-out
+- CLOSED (for me inside container)
+- OPEN (for me sunscreen fully opened)
+It is possible you would like to see it working differently, this ony requires a change on two places in the automattion.
+I decided to swap because I am using a Shelly 2.5 and just like that 0% is inside the container.
 
 To be honest this is not yet fool proof; if you manual operrate your sunscreen during heavy rain fall you just can do that.
-
 As you can see in the automation I consider wind and rain as critical in other words roll-in (to speak of close or open can be a bit confusing for me)
-
 I also use the orientation of my house (translated in sun-azimuth) and for an earlier sunset due nearby trees the sun- elevation (over time or sun set/rise).
 
 The tricky part remains the amount of sun; presently with sensor.buienradar_irradiance but I am thinking to change this part in more locally option with a lux sensor. Situated inside the house will give another problem due to likely the dimming factor of ther sunscreen.
@@ -54,8 +54,8 @@ Resulting in the boolean vaLues (created in the template file)
 These boolean values are used in the automation with the additional booleans (BTW you also need them to add in helpers):
 - timer.sunscreen_delay
 - input_boolean.sunscreen_set_manual
-- input_boolean.sunscreen_conditions_close
-- input_boolean.sunscreen_conditions_close_request
+- input_boolean.sunscreen_conditions
+- input_boolean.sunscreen_conditions_request
 - input_boolean.sunscreen_fake # can be used for sandboxing
 
 Steps in the automation are:
