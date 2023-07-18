@@ -52,11 +52,10 @@ Resulting in the boolean vaLues (created in the template file)
 - input_boolean.sunscreen_valid_elevation
 
 These boolean values are used in the automation with the additional booleans (BTW you also need them to add in helpers):
-- timer.sunscreen_delay
-- input_boolean.sunscreen_set_manual
-- input_boolean.sunscreen_conditions
-- input_boolean.sunscreen_conditions_request
-- input_boolean.sunscreen_fake # can be used for sandboxing
+- timer.sunscreen_delay                    # the time next sunscreen action will be dome
+- input_boolean.sunscreen_set_manual       # manual overide
+- input_boolean.sunscreen_status           # present status of the sunscreen
+- input_boolean.sunscreen_status_request   # requested status of the sunscreen based on conditions
 
 Steps in the automation are:
 
