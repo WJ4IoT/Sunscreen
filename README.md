@@ -14,7 +14,7 @@ see: https://github.com/remb0/Sunscreen
 So this automation is suitable for a (outside the house) sunscreen with only two options:
 - CLOSED (for me inside container)
 - OPEN (for me sunscreen fully opened)
-It is possible you would like to see it working differently, this ony requires a change on two places in the automattion.
+It is possible you would like to see it working differently, this only requires a change at two places in the automattion.
 I decided to swap because I am using a Shelly 2.5 and just like that 0% is inside the container.
 
 To be honest this is not yet fool proof; if you manual operrate your sunscreen during heavy rain fall you just can do that.
