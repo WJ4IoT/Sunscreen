@@ -1,135 +1,74 @@
 alias: sunscreen
-description: check to see if sunscreen may and/or needs to to be opened or closeds
+description: check to see if sunscreen action is required
 trigger:
   - platform: state
     entity_id:
-      - binary_sensor.sunscreen_valid_wind
-      - binary_sensor.sunscreen_no_rain_next_hour
-    id: sunscreen_action_critical
-    from: "on"
+      - timer.sunscreen_delay
+    from: active
+    to: idle
+  - platform: state
+    entity_id:
+      - binary_sensor.sunscreen_criteria
     to: "off"
   - platform: state
     entity_id:
-      - binary_sensor.sunscreen_valid_wind
-      - binary_sensor.sunscreen_no_rain_next_hour
-    id: sunscreen_action_normal
-    from: "off"
+      - binary_sensor.sunscreen_criteria
     to: "on"
-  - platform: state
-    entity_id:
-      - binary_sensor.sunscreen_valid_azimuth
-      - binary_sensor.sunscreen_valid_elevation
-      - binary_sensor.sunscreen_valid_irradiance
-      - binary_sensor.sunscreen_valid_months
-    id: sunscreen_action_normal
-  - platform: state
-    entity_id:
-      - timer.sunscreen_delay
-    id: sunscreen_action_delayed
-    from: active
-    to: idle
 condition: []
 action:
   - choose:
       - conditions:
-          - condition: and
-            conditions:
-              - condition: state
-                entity_id: binary_sensor.sunscreen_valid_months
-                state: "on"
-              - condition: state
-                entity_id: binary_sensor.sunscreen_valid_elevation
-                state: "on"
-              - condition: state
-                entity_id: binary_sensor.sunscreen_valid_azimuth
-                state: "on"
-              - condition: state
-                entity_id: binary_sensor.sunscreen_valid_irradiance
-                state: "on"
-              - condition: state
-                entity_id: binary_sensor.sunscreen_valid_wind
-                state: "on"
-              - condition: state
-                entity_id: binary_sensor.sunscreen_no_rain_next_hour
-                state: "on"
-        sequence:
-          - service: input_boolean.turn_on
-            data: {}
+          - condition: template
+            value_template: >-
+              {{ states('binary_sensor.sunscreen_criteria') !=
+              states('input_boolean.sunscreen_status') }}
+        sequence: null
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.sunscreen_manual
+            state: active
+          - condition: state
+            entity_id: binary_sensor.sunscreen_criteria_critical
+            state: "off"
+        sequence: []
+    default:
+      - if:
+          - condition: state
+            entity_id: binary_sensor.sunscreen_criteria
+            state: "off"
+        then:
+          - service: cover.close_cover
             target:
               entity_id:
-                - input_boolean.sunscreen_conditions_request
-    default:
-      - service: input_boolean.turn_off
-        data: {}
+                - cover.zonnescherm
+            data: {}
+            enabled: true
+          - service: input_boolean.turn_on
+            target:
+              entity_id:
+                - input_boolean.sunscreen_status
+            data: {}
+        else:
+          - service: cover.open_cover
+            target:
+              entity_id:
+                - cover.zonnescherm
+            data: {}
+            enabled: true
+          - service: input_boolean.turn_off
+            target:
+              entity_id:
+                - input_boolean.sunscreen_status
+            data: {}
+      - service: timer.start
+        data:
+          duration: "00:30:00"
         target:
-          entity_id:
-            - input_boolean.sunscreen_conditions_request
-  - if:
-      - condition: template
-        value_template: >-
-          {{ states('input_boolean.sunscreen_conditions') ==
-          states('input_boolean.sunscreen_conditions_request') }}
-    then:
-      - stop: ""
-    else: []
-  - choose:
-      - conditions:
-          - condition: trigger
-            id: sunscreen_action_critical
-        sequence: []
-      - conditions:
-          - condition: and
-            conditions:
-              - condition: trigger
-                id: sunscreen_action_normal
-              - condition: state
-                entity_id: timer.sunscreen_delay
-                state: idle
-              - condition: state
-                entity_id: input_boolean.sunscreen_set_manual
-                state: "off"
-        sequence: []
-      - conditions:
-          - condition: and
-            conditions:
-              - condition: trigger
-                id: sunscreen_action_delayed
-              - condition: state
-                entity_id: input_boolean.sunscreen_set_manual
-                state: "off"
-        sequence: []
-    default:
-      - stop: Not defined
-        error: false
-  - if:
-      - condition: state
-        entity_id: input_boolean.sunscreen_conditions_request
-        state: "on"
-    then:
-      - service: input_boolean.turn_on
-        data: {}
-        target:
-          entity_id:
-            - input_boolean.sunscreen_condition
-            - input_boolean.sunscreen_fake
-      - device_id: 66e36977a1b807baed363fcb41cbad5a
-        domain: cover
-        entity_id: cover.zonnescherm
-        type: open
-    else:
-      - service: input_boolean.turn_off
-        data: {}
-        target:
-          entity_id:
-            - input_boolean.sunscreen_conditions
-            - input_boolean.sunscreen_fake
-      - device_id: 66e36977a1b807baed363fcb41cbad5a
-        domain: cover
-        entity_id: cover.zonnescherm
-        type: close
-  - service: timer.start
-    data:
-      duration: "00:45:00"
-    target:
-      entity_id: timer.sunscreen_delay
+          entity_id: timer.sunscreen_delay
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 15
+          milliseconds: 0
+        enabled: true
 mode: single
