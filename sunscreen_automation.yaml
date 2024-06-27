@@ -37,7 +37,7 @@ action:
             entity_id: binary_sensor.sunscreen_criteria
             state: "off"
         then:
-          - service: cover.close_cover
+          - service: cover.open_cover
             target:
               entity_id:
                 - cover.zonnescherm
@@ -49,7 +49,7 @@ action:
                 - input_boolean.sunscreen_status
             data: {}
         else:
-          - service: cover.open_cover
+          - service: cover.close_cover
             target:
               entity_id:
                 - cover.zonnescherm
