@@ -31,6 +31,14 @@ action:
             entity_id: binary_sensor.sunscreen_criteria_critical
             state: "off"
         sequence: []
+      - conditions:
+          - condition: state
+            entity_id: timer.sunscreen_delay
+            state: idle
+          - condition: state
+            entity_id: binary_sensor.sunscreen_criteria_critical
+            state: not "off"
+        sequence: []
     default:
       - if:
           - condition: state
@@ -42,7 +50,6 @@ action:
               entity_id:
                 - cover.zonnescherm
             data: {}
-            enabled: true
           - service: input_boolean.turn_on
             target:
               entity_id:
@@ -54,7 +61,6 @@ action:
               entity_id:
                 - cover.zonnescherm
             data: {}
-            enabled: true
           - service: input_boolean.turn_off
             target:
               entity_id:
