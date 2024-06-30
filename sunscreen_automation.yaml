@@ -20,7 +20,7 @@ action:
       - conditions:
           - condition: template
             value_template: >-
-              {{ states('binary_sensor.sunscreen_criteria') ==
+              {{ states('binary_sensor.sunscreen_criteria') !=
               states('input_boolean.sunscreen_status') }}
         sequence: null
       - conditions:
