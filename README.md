@@ -57,6 +57,8 @@ In principle you do not need these, you can also hardcode in the template file (
 
 
 ### Template File
+It is advised not to use the tamplate file for these binary sensors but add each sensor in "create sensors" because refressing "template entities" will make manual sensors temporarily unavailable which can result in a unwanted swich of the group binary sensor from UNSAFE to SAFE and activate the automation.
+
 A template file needs to be created in your template folder with following binary sensors (see ![template file](https://github.com/WJ4IoT/Sunscreen/blob/main/sunscreen_template.yaml))
 - binary_sensor.sunscreen_criteria_rain
 - binary_sensor.sunscreen_criteria_wind
@@ -81,7 +83,7 @@ Besides the two sensor the next three sensors are used in the dashboard and auto
 Steps in the automation are (see: (see ![automation file](https://github.com/WJ4IoT/Sunscreen/blob/main/sunscreen_automation.yaml))
 
 - Triggers: timer not idle or sunscreen criteria sensor changed
-- Conditions: only continue when there is a change in status and not in manual modus (unless it is critical)
+- Conditions: only continue when there is a change in status and not in manual or not-idle modus (unless it is critical)
 - Perform sunscreen actions and (re)set timer
 
 Inside the UI you can create a new automatio, go into YAML view and copy this file
