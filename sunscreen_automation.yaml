@@ -34,10 +34,10 @@ action:
       - conditions:
           - condition: state
             entity_id: timer.sunscreen_delay
-            state: idle
+            state: not idle
           - condition: state
             entity_id: binary_sensor.sunscreen_criteria_critical
-            state: not "off"
+            state: "off"
         sequence: []
     default:
       - if:
@@ -78,3 +78,4 @@ action:
           milliseconds: 0
         enabled: true
 mode: single
+
