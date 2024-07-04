@@ -18,27 +18,29 @@ condition: []
 action:
   - choose:
       - conditions:
+          - condition: state
+            entity_id: input_boolean.sunscreen_manual
+            state: "on"
+          - condition: state
+            entity_id: binary_sensor.sunscreen_criteria_critical
+            state: "off"
+        sequence: []
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.sunscreen_criteria_critical
+            state: "off"
+          - condition: not
+            conditions:
+              - condition: state
+                entity_id: timer.sunscreen_delay
+                state: idle
+        sequence: []
+      - conditions:
           - condition: template
             value_template: >-
               {{ states('binary_sensor.sunscreen_criteria') !=
               states('input_boolean.sunscreen_status') }}
         sequence: null
-      - conditions:
-          - condition: state
-            entity_id: input_boolean.sunscreen_manual
-            state: active
-          - condition: state
-            entity_id: binary_sensor.sunscreen_criteria_critical
-            state: "off"
-        sequence: []
-      - conditions:
-          - condition: state
-            entity_id: timer.sunscreen_delay
-            state: not idle
-          - condition: state
-            entity_id: binary_sensor.sunscreen_criteria_critical
-            state: "off"
-        sequence: []
     default:
       - if:
           - condition: state
@@ -76,6 +78,5 @@ action:
           minutes: 0
           seconds: 15
           milliseconds: 0
-        enabled: true
 mode: single
 
