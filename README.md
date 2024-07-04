@@ -6,6 +6,7 @@ Sunscreen Automation in Home Assistant (YAW2A)
 You only need to put ALL criteria in binary_sensor.sunscreen_criteria.
 And those criteria who need instant action in binary_sensor.sunscreen_criteria_critical.
 The automation YAML will not require additional changes and is pretty straightforward.
+More to read, like which simple problems I had to taccle see also ![details](https://github.com/WJ4IoT/Sunscreen/blob/main/DETAILS.md)
 
 I als introduced a (local) rain sensor, there are topics inside the HA-forum but also this post looks very much like mine:
 https://en.number13.de/homeassistant-zha-zigbee-rain-sensor-hack-build-yourself/
@@ -68,7 +69,7 @@ A template file needs to be created in your template folder with following binar
 
 TIP: After update your template yaml you only need to refresh "template entities" (please check configuration first, no need for a reload or restart of HA itself))
 
-TIP Nowadays you can also create in "settings - create helpers" a template sensor. With this method you have easier access to the sensor (and avoid tools like VSC). However still using a textual file because it is easier to share.
+BETTER TIP Nowadays you can also create in "settings - create helpers" a template sensor. With this method you have easier access to the sensor (and avoid tools like VSC). However still using a textual file because it is easier to share.
 
 ### Helper sensors
 These binary sensors are grouped together in the group binay sensors:
@@ -77,7 +78,7 @@ These binary sensors are grouped together in the group binay sensors:
 Besides the two sensor the next three sensors are used in the dashboard and automation: 
 - timer.sunscreen_delay                     # the time next sunscreen action will be dome if delayed
 - input_boolean.sunscreen_manual            # manual overide, however critical criteria will close the sunscreen
-- input_boolean.sunscreen_status            # present status of the sunscreen
+- input_boolean.sunscreen_status            # present status of the sunscreen (
 
 ### Automation
 Steps in the automation are (see: (see ![automation file](https://github.com/WJ4IoT/Sunscreen/blob/main/sunscreen_automation.yaml))
@@ -86,7 +87,7 @@ Steps in the automation are (see: (see ![automation file](https://github.com/WJ4
 - Conditions: only continue when there is a change in status and not in manual or not-idle modus (unless it is critical)
 - Perform sunscreen actions and (re)set timer
 
-Inside the UI you can create a new automatio, go into YAML view and copy this file
+Inside the UI you can create a new automation, go into YAML view and copy this file
 <img src="images/automation.png" width="500" />
 
 ### Dashboard
