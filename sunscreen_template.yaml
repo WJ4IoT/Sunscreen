@@ -1,6 +1,6 @@
 ###################################################################################
 #   @author         :   WJ4IoT inspired by examples from Remb0 
-#   @last update    :   25/06/2024
+#   @last update    :   04/07/2024
 #   @configuration  :   template: !include_dir_merge_list template
 #   @file           :   config/template/sunscreen.yaml
 #   @refresh with   :   TEMPLATE ENTITIES
@@ -9,6 +9,15 @@
 ###################################################################################
 # Sunscreen
 ################################################################################### 
+
+#### REMARK ####
+# refreshing the template entities in developer tools might create an unwanted results 
+# because they all become temporarily unavailable when the template entities are refreshed
+# and can result in a SAFE situation in the group sensor. 
+# it is therefor advised to create template sensors in the UI (create helpers)
+# this will only effect the template sensor you are working on and not all template sensors textual defined
+# so use the file ony for cut & paste
+
 - binary_sensor:
 # Wind strenght - in km/h
 # depening on the type of the sunscreen; please check your sunscreen supplier
@@ -54,11 +63,13 @@
       {% if states('sensor.sun_solar_elevation')|float(0) <= states('input_number.sunscreen_valid_elevation')|float %} True
       {% else %} False
       {% endif %}
-# When is there enough light
+# When is there enough light (now based on my own weather station lux sensor before "sensor.buienradar_irradiance")
+# this binary sensor is a bit tricky because the value between low and high should remain unchanged
   - name: 'Sunscreen Criteria Irradiance'
     unique_id: sunscreen_criteria_irradiance
     device_class: problem
-    state: >-   
-      {% if states('sensor.buienradar_irradiance')|float(0) >= states('input_number.sunscreen_valid_irradiance_high')|float %} False
-      {% elif states('sensor.buienradar_irradiance')|float(0) <= states('input_number.sunscreen_valid_irradiance_low')|float %} True
+    state: >-
+      {% if states('sensor.weather_station_illuminance')|int >= states('input_number.sunscreen_valid_irradiance_high')|int %} False
+      {% elif states('sensor.weather_station_illuminance')|int <= states('input_number.sunscreen_valid_irradiance_low')|int %} True
+      {% else %} {{ this.state | default(0, true) }}
       {% endif %}
