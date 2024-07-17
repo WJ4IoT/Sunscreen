@@ -1,7 +1,13 @@
 # Sunscreen
 Sunscreen Automation in Home Assistant (YAW2A)
 
-### New Version
+### Versions
+- v2023.... Initiall version
+- v2024.... Updated version with group sensors and simplyfied automation
+- v20240717 Added templates so group members who are/become unavalable will result in a status 'On'/'Unsafe'/'Problem'
+
+
+## New Version
 ! A year later it was time for an update; with the introduction of two group binary sensors the automation is much simpler. 
 You only need to put ALL criteria in binary_sensor.sunscreen_criteria.
 And those criteria who need instant action in binary_sensor.sunscreen_criteria_critical.
@@ -56,7 +62,6 @@ These weather conditions are compared against their valid values (just create th
 
 In principle you do not need these, you can also hardcode in the template file (like done with months) or use directly the sensor (like done with the own rainsensor).
 
-
 ### Template File
 It is advised not to use the tamplate file for these binary sensors but add each sensor in "create sensors" because refressing "template entities" will make manual sensors temporarily unavailable which can result in a unwanted swich of the group binary sensor from UNSAFE to SAFE and activate the automation.
 
@@ -73,12 +78,24 @@ BETTER TIP Nowadays you can also create in "settings - create helpers" a templat
 
 ### Helper sensors
 These binary sensors are grouped together in the group binay sensors:
-- binary_sensor.sunscreen_criteria          # your collection of ALL binary sensors which are criteria for open/close sunscreen
-- binary_sensor.sunscreen_criteria_critical # your collection of CRITICAL binary sensors which are criteria for open/close sunscreen
+- binary_sensor.sunscreen_criteria_group    # your collection of ALL binary sensors which are criteria for open/close sunscreen
+- binary_sensor.sunscreen_criteria_critical_group # your collection of CRITICAL binary sensors which are criteria for open/close sunscreen
+These two names are changes 
 Besides the two sensor the next three sensors are used in the dashboard and automation: 
 - timer.sunscreen_delay                     # the time next sunscreen action will be dome if delayed
 - input_boolean.sunscreen_manual            # manual overide, however critical criteria will close the sunscreen
 - input_boolean.sunscreen_status            # present status of the sunscreen (
+
+### Template Binary Sensors
+With the options presently available in the 'binary sensor group' it is not possible that if a group member is or becomes 'unavailable' that this will result in a group status of 'On'/'Unsafe'/'Problem'. To solve this we need to create 2 new 'template binary sensor' (please not I am using the old names so the automation does not require further maintenance, the group member names are changed with an extended '_group' name.
+- binary_sensor.sunscreen_criteria          
+- binary_sensor.sunscreen_criteria_critical 
+
+The Template is genius so for sure not mine credits goes to @123 from the HA-community.
+```
+{{ expand('binary_sensor.sunscreen_criteria_critical_group') | selectattr('state', 'in', ['unavailable', 'unknown', 'none', 'on']) | list | count  > 0 }}
+```
+<img src="images/template.png" width="300" />
 
 ### Automation
 Steps in the automation are (see: (see ![automation file](https://github.com/WJ4IoT/Sunscreen/blob/main/sunscreen_automation.yaml))
